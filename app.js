@@ -16,8 +16,19 @@ function getRandomColor() {
   return Math.floor(Math.random() * colors.length);
 }
 
+const oldColor = [];
+function uniqueColor(color) {
+  if (oldColor.at(-1) == color) {
+    return false;
+  }
+  oldColor.push(color);
+  return true;
+}
+
 button.addEventListener("click", () => {
-  const random = getRandomColor();
+  let random = getRandomColor();
+  if (!uniqueColor(random)) random = getRandomColor();
+
   color.textContent = colors[random];
   color.style.color = colors[random];
   document.body.style.backgroundColor = colors[random];
